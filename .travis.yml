@@ -17,7 +17,7 @@ after_success:
     - docker build -t ccollot/server ./server
     - docker build -t collot/worker ./worker
 
-    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --passwprd-stdin
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
     - docker push ccollot/client
     - docker push ccollot/nginx
     - docker push ccollot/server
