@@ -1,0 +1,24 @@
+language: generic 
+
+sudo : required
+
+services:
+    - docker
+
+before_install:
+    - docker build -t ccollot/fibonacci -f ./client/Dockerfile.dev ./client
+
+script:
+    - docker run -e CI=true ccollot/fibonacci npm run test -- --coverage
+
+after_success:
+    - docker build -t ccollot/client ./client
+    - docker build -t ccollot/nginx ./nginx
+    - docker build -t ccollot/server ./server
+    - docker build -t collot/worker ./worker
+
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --passwprd-stdin
+    - docker push ccollot/client
+    - docker push ccollot/nginx
+    - docker push ccollot/server
+    - docker push ccollot/worker
