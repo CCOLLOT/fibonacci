@@ -22,3 +22,15 @@ after_success:
     - docker push ccollot/nginx
     - docker push ccollot/server
     - docker push ccollot/worker
+
+deploy:
+    provider: elasticbeanstalk
+    region: eu-west-1
+    app: multi_container_app
+    env: multi-container-bt-environment
+    bucket_name: beanapp
+    bucket_path : multi-docker
+    on:
+        branch: main
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
