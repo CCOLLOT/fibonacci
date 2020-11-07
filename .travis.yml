@@ -24,10 +24,10 @@ after_success:
     - docker push ccollot/worker
 
 deploy:
-    provider: elasticbeanstalk
-    region: eu-west-1
-    app: multi_container_app
-    env: multi-container-bt-environment
+    provider: 'elasticbeanstalk'
+    region: 'eu-west-1'
+    app: 'multi_container_app'
+    env: 'multi-container-bt-environment'
     bucket_name: beanapp
     bucket_path : multi-docker
     on:
